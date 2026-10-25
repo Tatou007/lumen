@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Suit Designs | Orbit Explorer</title><link rel="stylesheet" href="css/style.css">
+<style>
+.suit-intro-note{margin:0 0 30px}
+.suit-nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 36px}
+.suit-nav a{padding:8px 14px;border-radius:999px;border:1px solid var(--chip,#ffffff33);color:inherit;text-decoration:none;font-size:13px;background:#ffffff0a}
+.suit-nav a:hover{background:#ffffff1a}
+.suit-card{--suit:#999;--accent:#fff;--visor:#cde;--bg1:#111;--bg2:#222;position:relative;display:grid;grid-template-columns:minmax(260px,1fr) 1.4fr;gap:34px;align-items:center;padding:36px;margin:0 0 34px;border-radius:26px;border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);background:radial-gradient(circle at 20% 20%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 55%),linear-gradient(135deg,var(--bg1),var(--bg2));overflow:hidden;scroll-margin-top:90px}
+.suit-card:nth-of-type(even){grid-template-columns:1.4fr minmax(260px,1fr)}
+.suit-card:nth-of-type(even) .suit-stage{order:2}
+.suit-stage{position:relative;display:grid;place-items:center;min-height:380px;border-radius:20px;background:radial-gradient(circle at 50% 60%,color-mix(in srgb,var(--accent) 28%,transparent),transparent 65%)}
+.suit-stage svg{width:100%;max-width:290px;height:auto;filter:drop-shadow(0 18px 28px #0009)}
+.suit-planet{position:absolute;top:10px;right:10px;width:70px;height:70px;border-radius:50%;opacity:.9;box-shadow:inset -12px -8px 22px #0008,0 0 30px color-mix(in srgb,var(--accent) 50%,transparent)}
+.suit-copy .eyebrow{color:var(--accent)}
+.suit-copy h2{font-family:'Space Grotesk',sans-serif;margin:6px 0 4px;font-size:clamp(28px,4vw,40px)}
+.suit-tag{margin:0 0 14px;opacity:.85;line-height:1.6}
+.suit-price{display:inline-block;margin:0 0 18px;padding:6px 14px;border-radius:999px;background:color-mix(in srgb,var(--accent) 22%,transparent);border:1px solid var(--accent);font-weight:700}
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:0 0 16px;padding:0;list-style:none}
+.parts li{padding:10px 12px;border-radius:12px;background:#00000040;border-left:3px solid var(--accent);font-size:13.5px;line-height:1.55}
+.parts li b{display:block;color:var(--accent);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+.suit-note{padding:12px 14px;border-radius:12px;background:#ffffff10;border:1px dashed var(--accent);font-size:13px;line-height:1.65;margin:0 0 18px}
+.suit-note b{color:var(--accent)}
+.suit-actions{display:flex;flex-wrap:wrap;gap:10px}
+.suit-bg-deco{position:absolute;inset:0;pointer-events:none;opacity:.5}
+.suit-card>*{position:relative}
+.s-mercury .suit-bg-deco{background:repeating-radial-gradient(circle at 85% 12%,#ffffff12 0 2px,transparent 2px 38px)}
+.s-venus .suit-bg-deco{background:radial-gradient(ellipse at 50% 110%,#ff6a0055,transparent 60%),repeating-linear-gradient(160deg,#ffffff08 0 14px,transparent 14px 40px)}
+.s-mars .suit-bg-deco{background:radial-gradient(circle at 15% 90%,#00000055,transparent 40%),repeating-linear-gradient(90deg,#00000018 0 3px,transparent 3px 26px)}
+.s-jupiter .suit-bg-deco{background:repeating-linear-gradient(180deg,#ffffff0f 0 18px,#a0522d22 18px 40px,#00000022 40px 54px)}
+.s-saturn .suit-bg-deco{background:repeating-linear-gradient(180deg,#fff2 0 3px,transparent 3px 24px)}
+.s-uranus .suit-bg-deco{background:radial-gradient(circle at 50% 50%,#ffffff18,transparent 60%),repeating-linear-gradient(0deg,#ffffff0d 0 1px,transparent 1px 22px)}
+.s-neptune .suit-bg-deco{background:repeating-radial-gradient(ellipse at 100% 0,#5aa0ff22 0 6px,transparent 6px 44px)}
+.form-shell select option{color:#111}
+@media(max-width:820px){.suit-card,.suit-card:nth-of-type(even){grid-template-columns:1fr;padding:22px}.suit-card:nth-of-type(even) .suit-stage{order:0}.suit-stage{min-height:320px}}
+</style></head><body>
+<header class="site-header"><nav class="nav"><a class="brand" href="index.html"><span class="brand-mark">✦</span><span>ORBIT <span style="color:var(--cyan)">EXPLORER</span></span></a><div class="nav-links"><a class="" href="index.html">Home page</a><a class="" href="store.html">Store</a><a class="active" href="medical.html">Suit designs</a><a class="" href="basket.html">Basket <span class="basket-count" data-cart-count>0</span></a></div></nav></header>
+<main class="container">
+<header class="page-heading"><div class="eyebrow">Suit lab / 02</div><h1>One suit for every world.</h1><p>Every planet in the store has its own astronaut suit concept. Each design takes its colors and mood from its world, and its equipment list explains what that environment demands.</p></header>
+<div class="notice suit-intro-note">These are conceptual suit designs for educational and planning purposes, not certified or flight-ready equipment. Jupiter, Saturn, Uranus and Neptune have no solid surface, so their suits are speculative remote-atmosphere concepts.</div>
+<nav class="suit-nav" id="suitNav" aria-label="Jump to a suit"></nav>
+<div id="suits"></div>
+
+<section class="form-shell" id="inquiry"><div class="eyebrow">Suit inquiry</div><h2 style="font-family:'Space Grotesk',sans-serif">Interested in a suit?</h2><p class="muted" style="line-height:1.7">Tell us which suit caught your eye and how to reach you. This sends an inquiry only; it does not place or pay for an order. Please do not include sensitive personal details.</p>
+<form action="submit_medical.php" method="post" class="form-grid">
+<div class="field"><label for="customer-name">Your name</label><input id="customer-name" name="customer_name" maxlength="120" placeholder="Your name" required></div>
+<div class="field"><label for="suit-choice">Suit</label><select id="suit-choice" name="suit" required><option value="">Choose a suit</option><option>Mercury</option><option>Venus</option><option>Mars</option><option>Jupiter</option><option>Saturn</option><option>Uranus</option><option>Neptune</option></select></div>
+<div class="field full"><label for="contact">Email address</label><input id="contact" name="contact" type="email" maxlength="255" placeholder="you@example.com" required></div>
+<div class="field full"><label for="message">Your question or comment (optional)</label><textarea id="message" name="message" maxlength="2000" placeholder="Ask about materials, sizing, delivery, or anything else"></textarea></div>
+<div class="field full"><button class="btn btn-primary" type="submit">Send inquiry ↗</button></div>
+</form></section>
+</main>
+<footer class="site-footer"><div class="container footer-inner"><span>© 2026 Orbit Explorer · A journey through our Solar System</span><span>Made for curious minds · Educational concept</span></div></footer>
+
+<!-- Shared astronaut silhouette; colors come from each card's CSS variables -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="astro" viewBox="0 0 200 300">
+<rect x="22" y="104" width="30" height="84" rx="15" fill="var(--suit)" stroke="var(--accent)" stroke-width="3" transform="rotate(14 37 110)"/>
+<rect x="148" y="104" width="30" height="84" rx="15" fill="var(--suit)" stroke="var(--accent)" stroke-width="3" transform="rotate(-14 163 110)"/>
+<circle cx="24" cy="196" r="14" fill="var(--accent)"/><circle cx="176" cy="196" r="14" fill="var(--accent)"/>
+<rect x="64" y="190" width="32" height="88" rx="14" fill="var(--suit)" stroke="var(--accent)" stroke-width="3"/>
+<rect x="104" y="190" width="32" height="88" rx="14" fill="var(--suit)" stroke="var(--accent)" stroke-width="3"/>
+<rect x="58" y="268" width="44" height="24" rx="10" fill="var(--accent)"/><rect x="98" y="268" width="44" height="24" rx="10" fill="var(--accent)"/>
+<rect x="52" y="96" width="96" height="104" rx="26" fill="var(--suit)" stroke="var(--accent)" stroke-width="3"/>
+<rect x="76" y="124" width="48" height="34" rx="8" fill="#0006" stroke="var(--accent)" stroke-width="2"/>
+<circle cx="88" cy="141" r="5" fill="var(--accent)"/><circle cx="104" cy="141" r="5" fill="var(--visor)"/><rect x="114" y="137" width="6" height="8" rx="2" fill="var(--accent)"/>
+<rect x="56" y="178" width="88" height="10" rx="5" fill="var(--accent)"/>
+<circle cx="100" cy="58" r="46" fill="var(--suit)" stroke="var(--accent)" stroke-width="3"/>
+<ellipse cx="100" cy="58" rx="33" ry="29" fill="#071022" stroke="var(--accent)" stroke-width="3"/>
+<ellipse cx="100" cy="58" rx="33" ry="29" fill="var(--visor)" opacity=".55"/>
+<path d="M78 44 Q92 32 112 40" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" opacity=".7"/>
+<rect x="88" y="98" width="24" height="12" rx="5" fill="var(--accent)"/>
+</symbol></defs></svg>
+
+<script>
+const SUITS=[
+{id:'mercury',name:'Mercury',price:4200,tag:'Heat-reflecting armor for the planet closest to the Sun.',pal:{suit:'#aeb4bc',accent:'#f0a04b',visor:'#ffd27a',bg1:'#17171c',bg2:'#3b2d22'},planet:'radial-gradient(circle at 35% 30%,#d9d4cc,#8d8780 55%,#4a4642)',
+parts:[['Thermal protection','Reflective outer layers to reduce absorbed sunlight, plus insulation to protect the astronaut from extreme heat and cold.'],['Pressurized helmet','Contains a breathable mixture of oxygen and a suitable inert gas, such as nitrogen, at a controlled pressure.'],['Life-support system','Recycles exhaled carbon dioxide, supplies oxygen, controls humidity and regulates temperature.']],
+note:'Carbon dioxide should not be used as a breathable gas in the helmet, because high concentrations are dangerous. Nitrogen can be part of a breathing mixture, but it cannot replace oxygen. A helmet filled with greenhouse gases would not meaningfully warm Mercury: greenhouse gases retain heat on a planetary scale in a substantial atmosphere, and a small quantity inside a helmet has no such effect.',
+deco:'<path d="M100 8 L108 28 L128 30 L112 44" fill="none" stroke="#ffd27a" stroke-width="0" /><g opacity=".9"><circle cx="70" cy="215" r="5" fill="#0003"/><circle cx="128" cy="236" r="7" fill="#0003"/><circle cx="80" cy="250" r="4" fill="#0003"/><circle cx="118" cy="108" r="5" fill="#0003"/></g><rect x="52" y="150" width="96" height="6" fill="#ffd27a" opacity=".6"/>'},
+{id:'venus',name:'Venus',price:7000,tag:'An acid-proof, heat-shedding shell for the hottest planet.',pal:{suit:'#d9a441',accent:'#ff7a2f',visor:'#ffb347',bg1:'#2e1608',bg2:'#7a3d12'},planet:'radial-gradient(circle at 35% 30%,#ffe3a1,#e0a24a 55%,#8a4d16)',
+parts:[['Outer layer','PTFE or PFA to resist sulfuric acid.'],['Thermal insulation','Aluminized Mylar and silica aerogel to reduce heat transfer.'],['Pressure layer','Coated nylon to maintain safe internal pressure.'],['Helmet and visor','Resistant transparent materials with protective coatings.'],['Oxygen supply','Pressurized oxygen tank and regulators for breathing.'],['CO₂ filter','Lithium hydroxide or amine materials to remove exhaled carbon dioxide.'],['Cooling system','Water tubes and heat exchangers to regulate body temperature.'],['Radiation protection','Protective coatings and suitable shielding to reduce exposure.'],['Gloves and boots','Reinforced, acid-resistant and insulated materials.'],['AI sensors','Monitor pressure, temperature, oxygen and acid exposure.'],['Power supply','Rechargeable batteries to operate life-support systems.'],['Emergency system','Backup oxygen and power in case of failure.']],
+deco:'<g fill="#ff7a2f" opacity=".85"><path d="M30 20 q6 12 0 18 q-6 -6 0 -18z"/><path d="M168 40 q5 10 0 15 q-5 -5 0 -15z"/><path d="M150 12 q4 8 0 12 q-4 -4 0 -12z"/></g><path d="M52 210 Q76 198 100 210 T148 210" stroke="#ff7a2f" stroke-width="4" fill="none"/>'},
+{id:'mars',name:'Mars',price:5200,tag:'Rust-red expedition gear built around radiation and cold.',pal:{suit:'#c4592f',accent:'#ff9a6b',visor:'#ffd9bd',bg1:'#240d07',bg2:'#6b2c18'},planet:'radial-gradient(circle at 35% 30%,#ffb08a,#c1542c 55%,#5b2112)',
+parts:[['Active thermal control','Reflective materials alone cannot maintain a safe body temperature in every situation, so the suit adds active control.'],['Radiation protection','Combines practical shielding, exposure monitoring and shelter during solar radiation events.'],['AI-assisted monitoring','Detects dangerous changes early and helps manage oxygen, temperature, pressure and battery life.']],
+note:'Do not put greenhouse gases into the helmet to warm the astronaut. Carbon dioxide is a waste gas that must be removed from the breathing loop. Nitrogen can be used as a diluent in a properly designed breathing mixture, but oxygen is essential. The suit regulates heat through insulation and controlled heating and cooling, not through the greenhouse effect.',
+deco:'<path d="M52 224 h96" stroke="#ffd9bd" stroke-width="5" opacity=".6"/><path d="M60 80 l-14 -28 M140 80 l14 -28" stroke="#ffd9bd" stroke-width="3" opacity=".0"/><rect x="62" y="150" width="76" height="8" rx="4" fill="#00000040"/><circle cx="100" cy="58" r="52" fill="none" stroke="#ff9a6b" stroke-width="2" stroke-dasharray="3 7" opacity=".7"/>'},
+{id:'jupiter',name:'Jupiter',price:6800,tag:'A banded, heavy-duty concept for the giant of the Solar System.',pal:{suit:'#d9ab7d',accent:'#b8573b',visor:'#f7e4c6',bg1:'#241410',bg2:'#6e4a30'},planet:'repeating-linear-gradient(180deg,#e8c9a0 0 9px,#b8714a 9px 17px,#f3e1c4 17px 24px)',
+parts:[['Outer protective layer','High-strength polymer fabrics such as Kevlar to protect against mechanical damage and atmospheric particles.'],['Thermal insulation','Multilayer aluminized Mylar and insulating fabrics to regulate heat transfer.'],['Pressure layer','Gas-tight, polymer-coated nylon to maintain safe internal pressure.'],['Helmet and visor','Impact-resistant transparent materials with protective coatings for visibility and head protection.'],['Radiation shielding','Hydrogen-rich polyethylene to reduce exposure to energetic particles; shielding alone cannot eliminate Jupiter\'s intense radiation.'],['Oxygen supply','Pressurized oxygen tank and regulators to provide breathable air.'],['CO₂ removal system','Lithium hydroxide cartridges or regenerable amine materials to remove exhaled carbon dioxide.'],['Temperature-control system','Water-circulation tubes, pumps and heat exchangers to regulate body temperature.'],['Sensors and AI','Pressure, temperature and radiation sensors to monitor hazards and control life-support systems.'],['Power supply','Rechargeable batteries and protected electronics to operate sensors, pumps and communications.'],['Communication system','Radio equipment and antennas to maintain contact with a spacecraft.'],['Emergency system','Backup oxygen, independent power and emergency pressure controls.']],
+deco:'<g opacity=".8"><rect x="52" y="108" width="96" height="9" fill="#f7e4c6"/><rect x="52" y="160" width="96" height="9" fill="#8c3f28"/><rect x="64" y="215" width="32" height="8" fill="#8c3f28"/><rect x="104" y="215" width="32" height="8" fill="#8c3f28"/></g><ellipse cx="118" cy="168" rx="9" ry="5" fill="#b8573b" stroke="#f7e4c6" stroke-width="1.5"/>'},
+{id:'saturn',name:'Saturn',price:6100,tag:'Golden and ringed, a remote-atmosphere concept inspired by the ringed planet.',pal:{suit:'#e6d3a0',accent:'#c9a24d',visor:'#fff3c9',bg1:'#241e0e',bg2:'#5e5025'},planet:'linear-gradient(135deg,#f2e2b2,#c9a24d 60%,#6f5a22)',
+parts:[['Outer protective layer','Kevlar or other high-strength fibres to resist mechanical damage.'],['Thermal insulation','Aluminized Mylar and insulating fabrics to regulate heat transfer.'],['Pressure layer','Gas-tight, polymer-coated nylon to maintain safe internal pressure.'],['Helmet and visor','Resistant transparent materials with protective coatings for visibility.'],['Radiation protection','Hydrogen-rich polyethylene to reduce exposure to energetic particles.'],['Oxygen supply','Pressurized oxygen tank and regulators for breathing.'],['CO₂ filter','Lithium hydroxide or amine-based materials to remove exhaled carbon dioxide.'],['Temperature-control system','Water tubes, pumps and heat exchangers to maintain body temperature.'],['Sensors and AI','Pressure, temperature and radiation sensors to detect hazards and monitor life support.'],['Power supply','Rechargeable batteries and protected electronics to operate suit systems.'],['Communication system','Radio equipment and antennas to maintain contact with the spacecraft.'],['Emergency system','Backup oxygen, power and pressure controls for equipment failures.']],
+deco:'<ellipse cx="100" cy="150" rx="92" ry="16" fill="none" stroke="#c9a24d" stroke-width="5" opacity=".9"/><ellipse cx="100" cy="150" rx="78" ry="12" fill="none" stroke="#fff3c9" stroke-width="3" opacity=".7"/><ellipse cx="100" cy="58" rx="62" ry="10" fill="none" stroke="#c9a24d" stroke-width="3" opacity=".7"/>'},
+{id:'uranus',name:'Uranus',price:5700,tag:'Pale ice-blue gear for a frozen world tilted on its side.',pal:{suit:'#a8e6e8',accent:'#4fd0da',visor:'#e9ffff',bg1:'#06242c',bg2:'#13606b'},planet:'radial-gradient(circle at 35% 30%,#e3ffff,#7fd6dc 55%,#2c7f8a)',
+parts:[['Outer protective layer','Kevlar or other high-strength fibres to resist mechanical damage.'],['Thermal insulation','Aluminized Mylar and insulating fabrics to protect against extreme cold.'],['Pressure layer','Gas-tight, polymer-coated nylon to maintain safe internal pressure.'],['Helmet and visor','Resistant transparent materials with protective coatings for visibility.'],['Radiation shielding','Hydrogen-rich polyethylene to reduce exposure to energetic particles.'],['Oxygen supply','Pressurized oxygen tank and regulators to provide breathable air.'],['CO₂ filter','Lithium hydroxide or amine-based materials to remove exhaled carbon dioxide.'],['Temperature-control system','Water tubes, pumps and heat exchangers to regulate body temperature.'],['Sensors and AI','Pressure, temperature and radiation sensors to monitor hazards and life-support systems.'],['Power supply','Rechargeable batteries and protected electronics to operate suit equipment.'],['Communication system','Radio equipment and antennas to communicate with the spacecraft.'],['Emergency system','Backup oxygen, power and pressure controls in case of failure.']],
+deco:'<g stroke="#e9ffff" stroke-width="2.5" opacity=".85" stroke-linecap="round"><path d="M22 30 l0 18 M13 39 l18 0 M16 33 l12 12 M28 33 l-12 12"/><path d="M168 250 l0 14 M161 257 l14 0"/></g><g transform="rotate(-82 100 58)"><ellipse cx="100" cy="58" rx="60" ry="9" fill="none" stroke="#e9ffff" stroke-width="2" opacity=".7"/></g><rect x="52" y="170" width="96" height="5" fill="#e9ffff" opacity=".6"/>'},
+{id:'neptune',name:'Neptune',price:6400,tag:'Deep-blue, wind-cutting design for the most distant giant.',pal:{suit:'#3d5fdc',accent:'#5aa8ff',visor:'#c3e3ff',bg1:'#040924',bg2:'#10307a'},planet:'radial-gradient(circle at 35% 30%,#8fc2ff,#2f5fd8 55%,#0c1b66)',
+parts:[['Outer protective layer','Kevlar or other high-strength fibres to resist mechanical damage.'],['Thermal insulation','Aluminized Mylar and insulating fabrics to reduce heat transfer.'],['Pressure layer','Gas-tight, polymer-coated nylon to maintain safe internal pressure.'],['Helmet and visor','Resistant transparent materials with protective coatings for visibility.'],['Radiation shielding','Hydrogen-rich polyethylene to reduce exposure to energetic particles.'],['Oxygen supply','Pressurized oxygen tank and regulators to provide breathable air.'],['CO₂ filter','Lithium hydroxide or amine-based materials to remove exhaled carbon dioxide.'],['Temperature-control system','Water tubes, pumps and heat exchangers to regulate body temperature.'],['Sensors and AI','Pressure, temperature and radiation sensors to monitor hazards and life-support systems.'],['Power supply','Rechargeable batteries and protected electronics to operate suit equipment.'],['Communication system','Radio equipment and antennas to communicate with the spacecraft.'],['Emergency system','Backup oxygen, power and pressure controls in case of failure.']],
+deco:'<g fill="none" stroke="#c3e3ff" stroke-width="3" stroke-linecap="round" opacity=".8"><path d="M6 80 q22 -10 44 0 t44 0"/><path d="M110 250 q20 -9 40 0 t38 0"/><path d="M4 120 q18 -8 36 0"/></g><ellipse cx="100" cy="150" rx="26" ry="8" fill="#0a1b66" opacity=".7"/>'}
+];
+const money=n=>'$'+n.toLocaleString('en-US')+'.00';
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const nav=document.getElementById('suitNav'),root=document.getElementById('suits');
+SUITS.forEach(s=>{
+ nav.insertAdjacentHTML('beforeend',`<a href="#suit-${s.id}" style="--chip:${s.pal.accent}">${s.name}</a>`);
+ const vars=`--suit:${s.pal.suit};--accent:${s.pal.accent};--visor:${s.pal.visor};--bg1:${s.pal.bg1};--bg2:${s.pal.bg2}`;
+ root.insertAdjacentHTML('beforeend',`<article class="suit-card s-${s.id}" id="suit-${s.id}" style="${vars}">
+ <div class="suit-bg-deco"></div>
+ <div class="suit-stage"><div class="suit-planet" style="background:${s.planet}"></div>
+  <svg viewBox="0 0 200 300" role="img" aria-label="Illustration of the ${s.name} astronaut suit"><use href="#astro"/>${s.deco}</svg></div>
+ <div class="suit-copy"><div class="eyebrow">${s.name} suit / concept</div><h2>${s.name} Suit</h2><p class="suit-tag">${esc(s.tag)}</p><span class="suit-price">${money(s.price)}</span>
+  <ul class="parts">${s.parts.map(p=>`<li><b>${esc(p[0])}</b>${esc(p[1])}</li>`).join('')}</ul>
+  ${s.note?`<p class="suit-note"><b>Scientific note:</b> ${esc(s.note)}</p>`:''}
+  <div class="suit-actions"><a class="btn btn-primary" href="store.html">See in store ↗</a><a class="btn" href="#inquiry" data-ask="${s.name}">Ask about this suit</a></div></div></article>`);
+});
+document.addEventListener('click',e=>{const a=e.target.closest('[data-ask]');if(a){document.getElementById('suit-choice').value=a.dataset.ask;}});
+</script>
+<script src="planet.js"></script></body></html>
